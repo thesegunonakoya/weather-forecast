@@ -202,7 +202,7 @@
       width: 450px;
     }
     .weather-cards .card {
-      width: calc(100% / 2 - 10px);
+      width: calc(100%);
     }
   }
   @media (max-width: 750px) {
