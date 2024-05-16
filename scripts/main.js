@@ -4,10 +4,9 @@ const locationButton = document.querySelector(".location-btn");
 const currentWeatherDiv = document.querySelector(".current-weather");
 const weatherCardsDiv = document.querySelector(".weather-cards");
 
-const API_KEY = "503efcb5968f2f41971e53253c7ac360"; // API key from openweathermap.org
+const API_KEY = "503efcb5968f2f41971e53253c7ac360";
 
 const createWeatherCard = (cityName, weatherItem, index) => {
-    // Convert temperature from Kelvin to Celsius
     const temperature = weatherItem.main.temp - 273.15;
     let temperatureDescription = "";
 
@@ -25,7 +24,7 @@ const createWeatherCard = (cityName, weatherItem, index) => {
     
         return `<div class="details">
                 <h2>${cityName} (${dayOfWeek})</h2>
-                <h6>Temperature: ${temperature.toFixed(2)}°C (${temperatureDescription})</h6>
+                <h6>Temperature: ${temperature.toFixed(2)} <sup>o</sup> C (${temperatureDescription})</h6>
                 <h6>Wind: ${weatherItem.wind.speed} M/S</h6>
                 <h6>Humidity: ${weatherItem.main.humidity}%</h6>
             </div>
@@ -40,7 +39,7 @@ const createWeatherCard = (cityName, weatherItem, index) => {
         return `<li class="card day-${index}">
                     <h3>${dayOfWeek}</h3>
                     <img src="https://openweathermap.org/img/wn/${weatherItem.weather[0].icon}@4x.png" alt="weather-icon">
-                    <h6>Temp: ${temperature.toFixed(2)}°C</h6>
+                    <h6>Temp: ${temperature.toFixed(2)} <sup>o</sup> C</h6>
                     <h6>Wind: ${weatherItem.wind.speed} M/S</h6>
                     <h6>Humidity: ${weatherItem.main.humidity}%</h6>
                 </li>`;
@@ -51,7 +50,6 @@ const getWeatherDetails = (cityName, latitude, longitude) => {
     const WEATHER_API_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`;
 
     fetch(WEATHER_API_URL).then(response => response.json()).then(data => {
-        // Filter the forecasts to get only one forecast per day
         const uniqueForecastDays = [];
         const fiveDaysForecast = data.list.filter(forecast => {
             const forecastDate = new Date(forecast.dt_txt).getDate();
@@ -95,8 +93,7 @@ const getCityCoordinates = () => {
 const getUserCoordinates = () => {
     navigator.geolocation.getCurrentPosition(
         position => {
-            const { latitude, longitude } = position.coords; // Get coordinates of user location
-            // Get city name from coordinates using reverse geocoding API
+            const { latitude, longitude } = position.coords;
             const API_URL = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${API_KEY}`;
             fetch(API_URL).then(response => response.json()).then(data => {
                 const { name } = data[0];
@@ -105,7 +102,7 @@ const getUserCoordinates = () => {
                 alert("An error occurred while fetching the city name!");
             });
         },
-        error => { // Show alert if user denied the location permission
+        error => {
             if (error.code === error.PERMISSION_DENIED) {
                 alert("Geolocation request denied. Please reset location permission to grant access again.");
             } else {
@@ -114,6 +111,53 @@ const getUserCoordinates = () => {
         });
 }
 
+
+
+
+
+
+
+
+const saveLocation = (location) => {
+    let locations = JSON.parse(localStorage.getItem('locations')) || [];
+    
+    locations.push(location);
+    
+    localStorage.setItem('locations', JSON.stringify(locations));
+}
+
+const getLocations = () => {
+    return JSON.parse(localStorage.getItem('locations')) || [];
+}
+
+searchButton.addEventListener("click", () => {
+    const cityName = cityInput.value.trim();
+    if (cityName === "") return;
+    
+    saveLocation(cityName);
+    
+    getCityCoordinates();
+});
+
+
+window.addEventListener('load', () => {
+    let locations = getLocations();
+    
+    locations = locations.slice(Math.max(locations.length - 5, 0)).reverse();
+    
+    const locationListElement = document.getElementById('location-list');
+    
+    locationListElement.innerHTML = '';
+    
+    locations.forEach(location => {
+        const listItem = document.createElement('h6');
+        listItem.textContent = location;
+        locationListElement.appendChild(listItem);
+    });
+});
+
+
 locationButton.addEventListener("click", getUserCoordinates);
 searchButton.addEventListener("click", getCityCoordinates);
 cityInput.addEventListener("keyup", e => e.key === "Enter" && getCityCoordinates());
+

@@ -6,14 +6,12 @@
   <title>The Weather Forecast</title>
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Duru+Sans&display=swap" rel="stylesheet">
-  <script src="script.js" defer></script>
+  <script src="./scripts/main.js" defer></script>
 </head>
 
 <body>
   <h1>The Weather Forecast</h1>
+  <div id="header-weather"></div>
   <p class="firsttext">Welcome to Weather</p>
   <div class="container">
     <div class="weather-input">
@@ -22,12 +20,18 @@
       <button class="search-btn">Search</button>
       <div class="separator"></div>
       <button class="location-btn">Use Current Location</button>
+      <div class="sidebar-tab">
+      <div class="details">
+        <h2>Location History</h2>
+        <div id="location-list"></div>
+      </div>
+    </div>
     </div>
     <div class="weather-data">
       <div class="current-weather">
         <div class="details">
           <h2>Select a location</h2>
-          <h6>Temperature: °C</h6>
+          <h6>Temperature: <sup>o</sup> C</h6>
           <h6>Wind: M/S</h6>
           <h6>Humidity: %</h6>
         </div>
@@ -36,39 +40,39 @@
         <ul class="weather-cards">
           <li class="card">
             <h3> ______ </h3>
-            <h6>Temp: __C</h6>
-            <h6>Wind: __ M/S</h6>
-            <h6>Humidity: __%</h6>
+            <h6>Temp: <sup>o</sup> C</h6>
+            <h6>Wind: M/S</h6>
+            <h6>Humidity: %</h6>
           </li>
           <li class="card">
             <h3> ______ </h3>
-            <h6>Temp: __C</h6>
-            <h6>Wind: __ M/S</h6>
-            <h6>Humidity: __%</h6>
+            <h6>Temp: <sup>o</sup> C</h6>
+            <h6>Wind: M/S</h6>
+            <h6>Humidity: %</h6>
           </li>
           <li class="card">
             <h3> ______ </h3>
-            <h6>Temp: __C</h6>
-            <h6>Wind: __ M/S</h6>
-            <h6>Humidity: __%</h6>
+            <h6>Temp: <sup>o</sup> C</h6>
+            <h6>Wind: M/S</h6>
+            <h6>Humidity: %</h6>
           </li>
           <li class="card">
             <h3> ______ </h3>
-            <h6>Temp: __C</h6>
-            <h6>Wind: __ M/S</h6>
-            <h6>Humidity: __%</h6>
+            <h6>Temp: <sup>o</sup> C</h6>
+            <h6>Wind: M/S</h6>
+            <h6>Humidity: %</h6>
           </li>
           <li class="card">
             <h3> ______ </h3>
-            <h6>Temp: __C</h6>
-            <h6>Wind: __ M/S</h6>
-            <h6>Humidity: __%</h6>
+            <h6>Temp: <sup>o</sup> C</h6>
+            <h6>Wind: M/S</h6>
+            <h6>Humidity: %</h6>
           </li>
         </ul>
       </div>
     </div>
   </div>
-
+  <script src="./scripts/headerweather.js"></script>
 </body>
 
 </html>

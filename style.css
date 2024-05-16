@@ -35,6 +35,27 @@
     border: 1px solid #264e70;
   }
   
+  #header-weather {
+    color: #264e70;
+    background-color: #fff;
+    text-align: center;
+    font-weight: 700;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #264e70;
+    font-size: small;
+  }
+
+  #header-weather {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    #header-weather {
+        display: block;
+    }
+}
+
   .firsttext {
       text-align: center;
       margin: 30px;
@@ -48,6 +69,7 @@
   .city-input::placeholder { 
     color: #000; 
     opacity: 0.6;
+    font-size: small;
   }
   
   .weather-input {
@@ -120,6 +142,27 @@
   .weather-data h2 {
     color: #264e70;
   }
+
+  .sidebar-tab {
+    color: #000;
+    background: #fff;
+    border-radius: 0px;
+    padding: 20px 70px 25px 20px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #264e70;
+    margin-top: 20px;
+  }
+
+  .sidebar-tab h2 {
+    color: #264e70;
+  }
+
+  .sidebar-tab h6 {
+    margin-top: 12px;
+    font-size: 1rem;
+    font-weight: 500;
+  }
   
   .weather-data .current-weather {
     color: #000;
@@ -161,6 +204,10 @@
   
   .card h3{
     color: #264e70;
+  }
+
+  .card h6, .current-weather h6, #location-list h6{
+    font-size: small;
   }
   
   .weather-cards .card {
